@@ -26,6 +26,7 @@ def main():
     cmd = [
         "docker", "run", "--rm", "-it",
         "-v", f"{host_ws}:{container_ws}",
+        "-p", "9090:9090",
         "ros_lib_py:0.0.0"
     ]
 
