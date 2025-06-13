@@ -1,11 +1,13 @@
 FROM ros:humble-ros-core-jammy
 
-# 1. Install pip3, colcon, bash-completion and roslibpy
+# 1. Install pip3, colcon, tmux, bash-completion and roslibpy (and upgrade setuptools & packaging)
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
       python3-pip \
       python3-colcon-common-extensions \
+      tmux \
       bash-completion && \
+    pip3 install --upgrade setuptools packaging && \
     pip3 install roslibpy && \
     rm -rf /var/lib/apt/lists/*
 
@@ -22,5 +24,6 @@ RUN echo "source /opt/ros/humble/setup.bash"       >> /etc/bash.bashrc && \
 # 4. Use bash -lc so that ENTRYPOINT/CMD shells pick up /etc/bash.bashrc
 SHELL ["/bin/bash", "-lc"]
 
-# 5. By default, launch an interactive bash in /workspace
+# 5. By default, launch an interactive bash in /workspace with tmux capability
+env TMUX_PLUGIN_MANAGER_PATH="/workspace/.tmux/plugins"
 CMD ["bash"]
