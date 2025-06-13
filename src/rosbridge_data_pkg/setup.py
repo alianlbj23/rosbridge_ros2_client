@@ -25,6 +25,7 @@ setup(
     entry_points={
         'console_scripts': [
             'rosbridge_topic_receive_node = rosbridge_data_pkg.ros_lib_main:main',
+            'robot_arm_node = rosbridge_data_pkg.robot_arm_main:main',
         ],
     },
 )
